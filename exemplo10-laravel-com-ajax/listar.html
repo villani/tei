@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Listando categorias</title>
+    </head>
+    <body>
+        <h1>Listando categorias</h1>
+        <p><a href="inserir.html">Inserir categoria</a></p>
+        <div id="painel">
+
+        </div>
+        <script>
+
+            // Instanciando um objeto que representa a conexão HTTP estabelicida.
+            var xhttp = new XMLHttpRequest();
+
+            // Atributo que contém a função anônima executada sempre que houver alterações no estado da conexão HTTP.
+            xhttp.onreadystatechange = function () {
+
+                // O que deve ser feito se o estado da conexão corresponder aos requisitos abaixo.
+                if (this.readyState == 4 && this.status == 200) {
+
+                    listarCategorias(this);
+
+                }
+
+            };
+
+            // Definindo a requisição que será aberta.
+            xhttp.open('GET', 'http://localhost/categorias', true);
+
+            // Enviando a requisição
+            xhttp.send();
+
+        </script>
+        <script>
+            function listarCategorias(request) {
+
+                // Obtem a resposta retornada do servidor
+                var textoJson = request.responseText;
+
+                // Converte o texto para JSON
+                var json = JSON.parse(textoJson);
+
+                // Obtém o elemento do documento onde serão exibidas as informações
+                var painel = document.all['painel'];
+
+                // Formatando a lista que será inserida no painel
+                painel.innerHTML = '<ul>';
+                for (var categoria in json) { // foreach para javascript ;)
+                    painel.innerHTML += '<li>' + json[categoria].nome + '</li>';
+                }
+                painel.innerHTML += '</ul>';
+
+
+            }
+        </script>
+    </body>
+</html>

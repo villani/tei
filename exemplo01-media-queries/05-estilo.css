@@ -1,0 +1,17 @@
+/* 
+ * TRABALHANDO COM MEDIA QUERIES
+ * - Se a largura mínima da janela for 501px a página terá o fundo verde.
+ * - Se a largura máxima da janela for 500px a página terá o fundo amarelo.
+ *
+ */
+@media screen and (min-width: 501px) {
+    body {
+        background:green;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        background:yellow;
+    }
+}

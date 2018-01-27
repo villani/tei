@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Listando categorias</title>
+    </head>
+    <body>
+        <h1>Listando categorias</h1>
+        <div id="painel">
+
+        </div>
+        <script>
+
+            // Recuperando o elemento HTML onde serão exibidas as informações.
+            var painel = document.all['painel'];
+
+            // Instanciando um objeto que representa a conexão HTTP estabelicida.
+            var xhttp = new XMLHttpRequest();
+
+            // Atributo que contém a função anônima executada sempre que houver alterações no estado da conexão HTTP.
+            xhttp.onreadystatechange = function () {
+
+                // O que deve ser feito se o estado da conexão corresponder aos requisitos abaixo.
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var textoJson = this.responseText;
+                    painel.innerHTML = textoJson;
+
+                }
+
+            };
+
+            // Definindo a requisição que será aberta.
+            xhttp.open('GET', 'http://localhost/categorias', true);
+
+            // Enviando a requisição
+            xhttp.send();
+
+        </script>
+    </body>
+</html>

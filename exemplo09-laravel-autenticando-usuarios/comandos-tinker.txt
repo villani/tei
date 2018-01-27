@@ -1,0 +1,31 @@
+################################################################################
+######################### COMANDOS USADOS NO TINKER ############################
+################################################################################
+
+######################### Importando classe ####################################
+use App\User
+
+######################### Exibindo lista de usuários ###########################
+User::all()
+
+######################### Inserindo novo usuário na lista ######################
+User::create([
+'name'=>'Dilma Rousseff',
+'email'=>'iolanda@bol.com.br',
+'password'=> Hash::make('123456');
+]);
+
+######################### Verificando se há usuário autenticado ################
+Auth::check()
+
+######################### Autenticando usuário #################################
+Auth::attempt([
+'email'=>'iolanda@bol.com.br',
+'password'=>'123456'
+]);
+
+######################### Obtendo dados do usuário logado ######################
+Auth::user()->name
+
+######################### Efetuando logout #####################################
+Auth::logout()

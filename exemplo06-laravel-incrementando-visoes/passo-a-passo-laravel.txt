@@ -1,0 +1,83 @@
+################################################################################
+######################### PASSO-A-PASSO LARAVEL ################################
+################################################################################
+
+IMPORTANTE:
+
+No tutorial a seguir a "descrição" dos passos são identificadas com "-" no 
+ínicio do parágrafo. 
+
+O que é comando está identificado com "#" no início do parágrafo. A "#" NÃO FAZ 
+PARTE DO COMANDO!
+
+
+######################### CRIANDO PROJETO LARAVEL ##############################
+- Entrar na pasta Documentos:
+# cd ~/Documentos
+
+- Criar projeto Laravel:
+# laravel new semana12
+
+- Comando alternativo para criar o projeto Laravel:
+# composer create-project laravel/laravel semana12
+
+- Possíveis dependências:
+# sudo apt-get install php-mbstring
+# sudo apt-get install php-dom
+
+
+
+######################### TESTANDO PROJETO CRIADO ##############################
+- Criar arquivo .env:
+// duplicar ".env.exemple" e renomear
+
+- Gerar chave de identificação:
+# cd ~/Documentos/semana12
+# php artisan key:generate
+
+- Iniciando o serviço web
+# cd ~/Documentos/semana12
+# php artisan serve --port 80
+
+- maneira alternativa serviço web
+# php -S localhost:80 -t public/
+
+- Abrir http://localhost
+
+
+
+######################### CONFIGURANDO BD NO LARAVEL ###########################
+- Editar chaves no .env
+DB_CONNECTION=sqlite
+
+- Editar config/database.php
+database.sqlite -> escola.db
+
+- Criar o banco na pasta database
+
+
+
+######################### DEFININDO MODELOS E MIGRAÇÕES ########################
+- Criando o modelo Aluno
+# cd ~/Documentos/semana12
+# php artisan make:model Aluno -m
+
+- Para o caso de esquecer o parâmetro -m
+# php artisan make:migration create_alunos_table
+
+- Editar o arquivo "...alunos_table..." da pasta "database/migrations" para 
+definir os campos da tabela.
+// Dentro do método "up" entre os campos 'id' e 'timestamp'.
+# $table->string('nome');
+
+- Executando as migrações
+# php artisan migrate
+
+
+
+######################### USANDO O TINKER ("Laravel interativo") ###############
+- Abrindo o Tinker
+# php artisan tinker
+
+- Saindo do Tinker
+# quit

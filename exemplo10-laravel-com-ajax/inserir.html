@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inserir categoria</title>
+    </head>
+    <body>
+        <h1>Inserir categoria</h1>
+        <form action="http://localhost/categorias/inserir" method="post">
+            <p>
+                Nome: <br>
+                <input type="text" name="nome">
+            </p>
+            <p>
+                <input type="button" value="Gravar" onclick="submitForm()">
+                <input type="button" value="Cancelar" onclick="history.back()">
+            </p>
+        </form>
+        <script>
+            function submitForm() {
+
+                // Recuperando o elemento do formulário
+                var nome = document.all['nome'];
+
+                // Preparando os dados que serão enviados
+                var dados = 'nome=' + nome.value;
+
+                // Instanciando o objeto que manipula a requisição HTTP
+                var xhttp = new XMLHttpRequest();
+
+                // Definindo a função anônima que é executada sempre que altera o estado da requisição
+                xhttp.onreadystatechange = function () {
+
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        // quando a resposta da requisição estiver pronto, redirecionar para 'listar'
+                        window.location = 'listar.html';
+                    }
+                };
+
+                // Define para onde a requisição será enviada
+                xhttp.open('post', 'http://localhost/categorias/inserir', true);
+
+                // Cabeçalho da requisição necessário para envio de dados de um formulário
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                // Enviando requisição e dados. Essa sobrecarga de 'send' só funciona com o parâmetro 'post' no método 'open'
+                xhttp.send(dados);
+            }
+
+        </script>
+    </body>
+</html>
