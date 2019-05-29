@@ -1,0 +1,26 @@
+<meta charset="utf-8">
+<style>
+	#conteudo {
+		width: 400px;
+		height: 500px;
+		border-style: solid;
+	}
+</style>
+<h1>Exibindo o conteúdo de documentos HTML em DIVS</h1>
+<input type="button" value="Carregar">
+<div id="conteudo"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$("input").click(function() {
+			$("#conteudo").text("Ola JQuery!");
+		});
+
+		$("input").dblclick(function() {
+			$('#conteudo').load('http://localhost:8000/departamentos');
+		});
+
+	});
+</script>

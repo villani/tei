@@ -1,0 +1,23 @@
+<h1>Edição de Departamento</h1>
+<form id="inserir">
+	<p>
+		Nome: <br>
+		<input type="text" name="nome" id="nome" class="form-control">
+	</p>
+	<p>
+		<input type="button" value="Gravar" id="gravar" class="btn btn-primary">
+		<input type="button" value="Voltar" class="btn btn-secondary" onclick="window.location='file:///home/aluno/Documentos/TEI/empresa/resources/views/mobile/listar-simples.html'">
+	</p>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$('#gravar').click(function(){
+
+			$.post( 'http://127.0.0.1:8000/departamento' , $('#inserir').serialize());
+
+			location = 'file:///home/aluno/Documentos/TEI/empresa/resources/views/mobile/listar-simples.html';
+		});
+	});
+</script>

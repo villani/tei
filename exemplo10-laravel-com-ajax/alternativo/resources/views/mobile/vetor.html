@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<h1>Definindo um vetor de objeto JavaScript</h1>
+<script>
+	var vetor = [
+		{'nome': 'Dória', 'partido': 'PSDB'},
+		{'nome': 'Alkimin', 'partido': 'PSDB'},
+		{'nome': 'Serra', 'partido': 'PSDB'},
+	];
+
+	var saida = '';
+	for (var i = 0; i < vetor.length; i++) {
+		saida += '<p>Nome: ' + vetor[i].nome + '</p>';
+		saida += '<p>Partido: ' + vetor[i].partido + '</p>';
+		saida += '<hr>';
+	}
+	document.write(saida);
+</script>
