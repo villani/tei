@@ -1,0 +1,483 @@
+leonardo@VILLANI-0001:~/Documentos/Fatec/2020.01/TEI/semana06$ sqlite3 portal.sqlite
+SQLite version 3.22.0 2018-01-22 18:45:57
+Enter ".help" for usage hints.
+sqlite> .tables
+usuarios
+sqlite> .help
+.archive ...           Manage SQL archives: ".archive --help" for details
+.auth ON|OFF           Show authorizer callbacks
+.backup ?DB? FILE      Backup DB (default "main") to FILE
+.bail on|off           Stop after hitting an error.  Default OFF
+.binary on|off         Turn binary output on or off.  Default OFF
+.cd DIRECTORY          Change the working directory to DIRECTORY
+.changes on|off        Show number of rows changed by SQL
+.check GLOB            Fail if output since .testcase does not match
+.clone NEWDB           Clone data into NEWDB from the existing database
+.databases             List names and files of attached databases
+.dbinfo ?DB?           Show status information about the database
+.dump ?TABLE? ...      Dump the database in an SQL text format
+                         If TABLE specified, only dump tables matching
+                         LIKE pattern TABLE.
+.echo on|off           Turn command echo on or off
+.eqp on|off|full       Enable or disable automatic EXPLAIN QUERY PLAN
+.excel                 Display the output of next command in a spreadsheet
+.exit                  Exit this program
+.expert                EXPERIMENTAL. Suggest indexes for specified queries
+.fullschema ?--indent? Show schema and the content of sqlite_stat tables
+.headers on|off        Turn display of headers on or off
+.help                  Show this message
+.import FILE TABLE     Import data from FILE into TABLE
+.imposter INDEX TABLE  Create imposter table TABLE on index INDEX
+.indexes ?TABLE?       Show names of all indexes
+                         If TABLE specified, only show indexes for tables
+                         matching LIKE pattern TABLE.
+.limit ?LIMIT? ?VAL?   Display or change the value of an SQLITE_LIMIT
+.lint OPTIONS          Report potential schema issues. Options:
+                         fkey-indexes     Find missing foreign key indexes
+.load FILE ?ENTRY?     Load an extension library
+.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?     Set output mode where MODE is one of:
+                         ascii    Columns/rows delimited by 0x1F and 0x1E
+                         csv      Comma-separated values
+                         column   Left-aligned columns.  (See .width)
+                         html     HTML <table> code
+                         insert   SQL insert statements for TABLE
+                         line     One value per line
+                         list     Values delimited by "|"
+                         quote    Escape answers as for SQL
+                         tabs     Tab-separated values
+                         tcl      TCL list elements
+.nullvalue STRING      Use STRING in place of NULL values
+.once (-e|-x|FILE)     Output for the next SQL command only to FILE
+                         or invoke system text editor (-e) or spreadsheet (-x)
+                         on the output.
+.open ?OPTIONS? ?FILE? Close existing database and reopen FILE
+                         The --new option starts with an empty file
+.output ?FILE?         Send output to FILE or stdout
+.print STRING...       Print literal STRING
+.prompt MAIN CONTINUE  Replace the standard prompts
+.quit                  Exit this program
+.read FILENAME         Execute SQL in FILENAME
+.restore ?DB? FILE     Restore content of DB (default "main") from FILE
+.save FILE             Write in-memory database into FILE
+.scanstats on|off      Turn sqlite3_stmt_scanstatus() metrics on or off
+.schema ?PATTERN?      Show the CREATE statements matching PATTERN
+                          Add --indent for pretty-printing
+.selftest ?--init?     Run tests defined in the SELFTEST table
+.separator COL ?ROW?   Change the column separator and optionally the row
+                         separator for both the output mode and .import
+.session CMD ...       Create or control sessions
+.sha3sum ?OPTIONS...?  Compute a SHA3 hash of database content
+.shell CMD ARGS...     Run CMD ARGS... in a system shell
+.show                  Show the current values for various settings
+.stats ?on|off?        Show stats or turn stats on or off
+.system CMD ARGS...    Run CMD ARGS... in a system shell
+.tables ?TABLE?        List names of tables
+                         If TABLE specified, only list tables matching
+                         LIKE pattern TABLE.
+.testcase NAME         Begin redirecting output to 'testcase-out.txt'
+.timeout MS            Try opening locked tables for MS milliseconds
+.timer on|off          Turn SQL timer on or off
+.trace FILE|off        Output each SQL statement as it is run
+.vfsinfo ?AUX?         Information about the top-level VFS
+.vfslist               List all available VFSes
+.vfsname ?AUX?         Print the name of the VFS stack
+.width NUM1 NUM2 ...   Set column widths for "column" mode
+                         Negative values right-justify
+sqlite> .dump usuarios
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE usuarios (
+id INTEGER PRIMARY KEY,
+nome TEXT,
+email TEXT,
+senha TEXT,
+nivel INTEGER
+);
+COMMIT;
+sqlite> .schema
+CREATE TABLE usuarios (
+id INTEGER PRIMARY KEY,
+nome TEXT,
+email TEXT,
+senha TEXT,
+nivel INTEGER
+);
+sqlite> 
+sqlite> -- INSERINDO REGISTROS NA TABELA
+sqlite> INSERT INTO usuarios VALUES 
+   ...> (1, 'Bolsonaro', 'bolso@gmail.com', '123', 0),
+   ...> (2, 'Temer', 'temer@ig.com.br', '456', 1),
+   ...> (3, 'Dilma', 'dilma@bol.com.br', '789', 2);
+sqlite> 
+sqlite> -- EXIBINDO REGISTROS DA TABELA
+sqlite> SELECT * FROM usuarios;
+1|Bolsonaro|bolso@gmail.com|123|0
+2|Temer|temer@ig.com.br|456|1
+3|Dilma|dilma@bol.com.br|789|2
+sqlite> .help
+.archive ...           Manage SQL archives: ".archive --help" for details
+.auth ON|OFF           Show authorizer callbacks
+.backup ?DB? FILE      Backup DB (default "main") to FILE
+.bail on|off           Stop after hitting an error.  Default OFF
+.binary on|off         Turn binary output on or off.  Default OFF
+.cd DIRECTORY          Change the working directory to DIRECTORY
+.changes on|off        Show number of rows changed by SQL
+.check GLOB            Fail if output since .testcase does not match
+.clone NEWDB           Clone data into NEWDB from the existing database
+.databases             List names and files of attached databases
+.dbinfo ?DB?           Show status information about the database
+.dump ?TABLE? ...      Dump the database in an SQL text format
+                         If TABLE specified, only dump tables matching
+                         LIKE pattern TABLE.
+.echo on|off           Turn command echo on or off
+.eqp on|off|full       Enable or disable automatic EXPLAIN QUERY PLAN
+.excel                 Display the output of next command in a spreadsheet
+.exit                  Exit this program
+.expert                EXPERIMENTAL. Suggest indexes for specified queries
+.fullschema ?--indent? Show schema and the content of sqlite_stat tables
+.headers on|off        Turn display of headers on or off
+.help                  Show this message
+.import FILE TABLE     Import data from FILE into TABLE
+.imposter INDEX TABLE  Create imposter table TABLE on index INDEX
+.indexes ?TABLE?       Show names of all indexes
+                         If TABLE specified, only show indexes for tables
+                         matching LIKE pattern TABLE.
+.limit ?LIMIT? ?VAL?   Display or change the value of an SQLITE_LIMIT
+.lint OPTIONS          Report potential schema issues. Options:
+                         fkey-indexes     Find missing foreign key indexes
+.load FILE ?ENTRY?     Load an extension library
+.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?     Set output mode where MODE is one of:
+                         ascii    Columns/rows delimited by 0x1F and 0x1E
+                         csv      Comma-separated values
+                         column   Left-aligned columns.  (See .width)
+                         html     HTML <table> code
+                         insert   SQL insert statements for TABLE
+                         line     One value per line
+                         list     Values delimited by "|"
+                         quote    Escape answers as for SQL
+                         tabs     Tab-separated values
+                         tcl      TCL list elements
+.nullvalue STRING      Use STRING in place of NULL values
+.once (-e|-x|FILE)     Output for the next SQL command only to FILE
+                         or invoke system text editor (-e) or spreadsheet (-x)
+                         on the output.
+.open ?OPTIONS? ?FILE? Close existing database and reopen FILE
+                         The --new option starts with an empty file
+.output ?FILE?         Send output to FILE or stdout
+.print STRING...       Print literal STRING
+.prompt MAIN CONTINUE  Replace the standard prompts
+.quit                  Exit this program
+.read FILENAME         Execute SQL in FILENAME
+.restore ?DB? FILE     Restore content of DB (default "main") from FILE
+.save FILE             Write in-memory database into FILE
+.scanstats on|off      Turn sqlite3_stmt_scanstatus() metrics on or off
+.schema ?PATTERN?      Show the CREATE statements matching PATTERN
+                          Add --indent for pretty-printing
+.selftest ?--init?     Run tests defined in the SELFTEST table
+.separator COL ?ROW?   Change the column separator and optionally the row
+                         separator for both the output mode and .import
+.session CMD ...       Create or control sessions
+.sha3sum ?OPTIONS...?  Compute a SHA3 hash of database content
+.shell CMD ARGS...     Run CMD ARGS... in a system shell
+.show                  Show the current values for various settings
+.stats ?on|off?        Show stats or turn stats on or off
+.system CMD ARGS...    Run CMD ARGS... in a system shell
+.tables ?TABLE?        List names of tables
+                         If TABLE specified, only list tables matching
+                         LIKE pattern TABLE.
+.testcase NAME         Begin redirecting output to 'testcase-out.txt'
+.timeout MS            Try opening locked tables for MS milliseconds
+.timer on|off          Turn SQL timer on or off
+.trace FILE|off        Output each SQL statement as it is run
+.vfsinfo ?AUX?         Information about the top-level VFS
+.vfslist               List all available VFSes
+.vfsname ?AUX?         Print the name of the VFS stack
+.width NUM1 NUM2 ...   Set column widths for "column" mode
+                         Negative values right-justify
+sqlite> .mode line
+sqlite> SELECT * FROM usuarios;
+   id = 1
+ nome = Bolsonaro
+email = bolso@gmail.com
+senha = 123
+nivel = 0
+
+   id = 2
+ nome = Temer
+email = temer@ig.com.br
+senha = 456
+nivel = 1
+
+   id = 3
+ nome = Dilma
+email = dilma@bol.com.br
+senha = 789
+nivel = 2
+sqlite> 
+sqlite> 
+sqlite> -- EXIBINDO O 'AUTO INCREMENTO' DOS REGISTROS
+sqlite> SELECT rowid, * FROM usuarios;
+   id = 1
+   id = 1
+ nome = Bolsonaro
+email = bolso@gmail.com
+senha = 123
+nivel = 0
+
+   id = 2
+   id = 2
+ nome = Temer
+email = temer@ig.com.br
+senha = 456
+nivel = 1
+
+   id = 3
+   id = 3
+ nome = Dilma
+email = dilma@bol.com.br
+senha = 789
+nivel = 2
+sqlite> 
+sqlite> INSERT INTO usuarios VALUES 
+   ...> (5, 'Lula', 'lula@pt.com.br', '123', 2);
+sqlite> SELECT rowid, * FROM usuarios;
+   id = 1
+   id = 1
+ nome = Bolsonaro
+email = bolso@gmail.com
+senha = 123
+nivel = 0
+
+   id = 2
+   id = 2
+ nome = Temer
+email = temer@ig.com.br
+senha = 456
+nivel = 1
+
+   id = 3
+   id = 3
+ nome = Dilma
+email = dilma@bol.com.br
+senha = 789
+nivel = 2
+
+   id = 5
+   id = 5
+ nome = Lula
+email = lula@pt.com.br
+senha = 123
+nivel = 2
+sqlite> 
+sqlite> CREATE teste (
+   ...> nome TEXT
+   ...> );
+Error: near "teste": syntax error
+sqlite> CREATE TABLE teste (
+   ...> nome TEXT
+   ...> );
+sqlite> 
+sqlite> INSERT INTO teste VALUES 
+   ...> ('ALGUM valor');
+sqlite> 
+sqlite> SELECT rowid, * FROM teste;
+rowid = 1
+ nome = ALGUM valor
+sqlite> .tables
+teste     usuarios
+sqlite> 
+sqlite> -- CRIANDO RELACIONAMENTO ENTRE TABELAS
+sqlite> CREATE TABLE categorias (
+   ...> id INTEGER PRIMARY KEY,
+   ...> usuario_id INTEGER,
+   ...> nome TEXT,
+   ...> FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+   ...> );
+sqlite> 
+sqlite> .help
+.archive ...           Manage SQL archives: ".archive --help" for details
+.auth ON|OFF           Show authorizer callbacks
+.backup ?DB? FILE      Backup DB (default "main") to FILE
+.bail on|off           Stop after hitting an error.  Default OFF
+.binary on|off         Turn binary output on or off.  Default OFF
+.cd DIRECTORY          Change the working directory to DIRECTORY
+.changes on|off        Show number of rows changed by SQL
+.check GLOB            Fail if output since .testcase does not match
+.clone NEWDB           Clone data into NEWDB from the existing database
+.databases             List names and files of attached databases
+.dbinfo ?DB?           Show status information about the database
+.dump ?TABLE? ...      Dump the database in an SQL text format
+                         If TABLE specified, only dump tables matching
+                         LIKE pattern TABLE.
+.echo on|off           Turn command echo on or off
+.eqp on|off|full       Enable or disable automatic EXPLAIN QUERY PLAN
+.excel                 Display the output of next command in a spreadsheet
+.exit                  Exit this program
+.expert                EXPERIMENTAL. Suggest indexes for specified queries
+.fullschema ?--indent? Show schema and the content of sqlite_stat tables
+.headers on|off        Turn display of headers on or off
+.help                  Show this message
+.import FILE TABLE     Import data from FILE into TABLE
+.imposter INDEX TABLE  Create imposter table TABLE on index INDEX
+.indexes ?TABLE?       Show names of all indexes
+                         If TABLE specified, only show indexes for tables
+                         matching LIKE pattern TABLE.
+.limit ?LIMIT? ?VAL?   Display or change the value of an SQLITE_LIMIT
+.lint OPTIONS          Report potential schema issues. Options:
+                         fkey-indexes     Find missing foreign key indexes
+.load FILE ?ENTRY?     Load an extension library
+.log FILE|off          Turn logging on or off.  FILE can be stderr/stdout
+.mode MODE ?TABLE?     Set output mode where MODE is one of:
+                         ascii    Columns/rows delimited by 0x1F and 0x1E
+                         csv      Comma-separated values
+                         column   Left-aligned columns.  (See .width)
+                         html     HTML <table> code
+                         insert   SQL insert statements for TABLE
+                         line     One value per line
+                         list     Values delimited by "|"
+                         quote    Escape answers as for SQL
+                         tabs     Tab-separated values
+                         tcl      TCL list elements
+.nullvalue STRING      Use STRING in place of NULL values
+.once (-e|-x|FILE)     Output for the next SQL command only to FILE
+                         or invoke system text editor (-e) or spreadsheet (-x)
+                         on the output.
+.open ?OPTIONS? ?FILE? Close existing database and reopen FILE
+                         The --new option starts with an empty file
+.output ?FILE?         Send output to FILE or stdout
+.print STRING...       Print literal STRING
+.prompt MAIN CONTINUE  Replace the standard prompts
+.quit                  Exit this program
+.read FILENAME         Execute SQL in FILENAME
+.restore ?DB? FILE     Restore content of DB (default "main") from FILE
+.save FILE             Write in-memory database into FILE
+.scanstats on|off      Turn sqlite3_stmt_scanstatus() metrics on or off
+.schema ?PATTERN?      Show the CREATE statements matching PATTERN
+                          Add --indent for pretty-printing
+.selftest ?--init?     Run tests defined in the SELFTEST table
+.separator COL ?ROW?   Change the column separator and optionally the row
+                         separator for both the output mode and .import
+.session CMD ...       Create or control sessions
+.sha3sum ?OPTIONS...?  Compute a SHA3 hash of database content
+.shell CMD ARGS...     Run CMD ARGS... in a system shell
+.show                  Show the current values for various settings
+.stats ?on|off?        Show stats or turn stats on or off
+.system CMD ARGS...    Run CMD ARGS... in a system shell
+.tables ?TABLE?        List names of tables
+                         If TABLE specified, only list tables matching
+                         LIKE pattern TABLE.
+.testcase NAME         Begin redirecting output to 'testcase-out.txt'
+.timeout MS            Try opening locked tables for MS milliseconds
+.timer on|off          Turn SQL timer on or off
+.trace FILE|off        Output each SQL statement as it is run
+.vfsinfo ?AUX?         Information about the top-level VFS
+.vfslist               List all available VFSes
+.vfsname ?AUX?         Print the name of the VFS stack
+.width NUM1 NUM2 ...   Set column widths for "column" mode
+                         Negative values right-justify
+sqlite> .dump
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE usuarios (
+id INTEGER PRIMARY KEY,
+nome TEXT,
+email TEXT,
+senha TEXT,
+nivel INTEGER
+);
+INSERT INTO usuarios VALUES(1,'Bolsonaro','bolso@gmail.com','123',0);
+INSERT INTO usuarios VALUES(2,'Temer','temer@ig.com.br','456',1);
+INSERT INTO usuarios VALUES(3,'Dilma','dilma@bol.com.br','789',2);
+INSERT INTO usuarios VALUES(5,'Lula','lula@pt.com.br','123',2);
+CREATE TABLE teste (
+nome TEXT
+);
+INSERT INTO teste VALUES('ALGUM valor');
+CREATE TABLE categorias (
+id INTEGER PRIMARY KEY,
+usuario_id INTEGER,
+nome TEXT,
+FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+);
+COMMIT;
+sqlite> SELECT * FROM usuarios;
+   id = 1
+ nome = Bolsonaro
+email = bolso@gmail.com
+senha = 123
+nivel = 0
+
+   id = 2
+ nome = Temer
+email = temer@ig.com.br
+senha = 456
+nivel = 1
+
+   id = 3
+ nome = Dilma
+email = dilma@bol.com.br
+senha = 789
+nivel = 2
+
+   id = 5
+ nome = Lula
+email = lula@pt.com.br
+senha = 123
+nivel = 2
+sqlite> 
+sqlite> -- TESTANDO INTEGRIDADE DOS RELACIONAMENTOS
+sqlite> 
+sqlite> INSERT INTO categorias VALUES 
+   ...> (1, 4, 'leitor');
+sqlite> 
+sqlite> SELECT * FROM categorias;
+        id = 1
+usuario_id = 4
+      nome = leitor
+sqlite> 
+sqlite> PRAGMA foreign_keys=ON;
+sqlite> PRAGMA foreign_keys;
+foreign_keys = 1
+sqlite> 
+sqlite> 
+sqlite> INSERT INTO categorias VALUES 
+   ...> (2, 7, 'autor');
+Error: FOREIGN KEY constraint failed
+sqlite> INSERT INTO categorias VALUES 
+   ...> (2, 5, 'autor');
+sqlite> 
+sqlite> .dump
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE usuarios (
+id INTEGER PRIMARY KEY,
+nome TEXT,
+email TEXT,
+senha TEXT,
+nivel INTEGER
+);
+INSERT INTO usuarios VALUES(1,'Bolsonaro','bolso@gmail.com','123',0);
+INSERT INTO usuarios VALUES(2,'Temer','temer@ig.com.br','456',1);
+INSERT INTO usuarios VALUES(3,'Dilma','dilma@bol.com.br','789',2);
+INSERT INTO usuarios VALUES(5,'Lula','lula@pt.com.br','123',2);
+CREATE TABLE teste (
+nome TEXT
+);
+INSERT INTO teste VALUES('ALGUM valor');
+CREATE TABLE categorias (
+id INTEGER PRIMARY KEY,
+usuario_id INTEGER,
+nome TEXT,
+FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
+);
+INSERT INTO categorias VALUES(1,4,'leitor');
+INSERT INTO categorias VALUES(2,5,'autor');
+COMMIT;
+sqlite> 
+sqlite> -- EXPORTANDO A BASE
+sqlite> -- - Definindo um arquivo de saida
+sqlite> .output portal.sql
+sqlite> .dump
+sqlite> .quit
