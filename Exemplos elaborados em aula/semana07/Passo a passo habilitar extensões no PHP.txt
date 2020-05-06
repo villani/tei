@@ -1,0 +1,26 @@
+############### NO WINDOWS ######################
+1. Identificar o binário/executável do PHP que está sendo usado. Ex:
+echo %Path% (Windows)
+echo $Path (Linux)
+
+2. Navegar até a pasta do binário/executável e abrir o arquivo php.ini.
+- Usar o php.ini-development se não houver um php.ini
+
+3. No arquivo php.ini,  pesquisar por 'extension_dir'. Descomentar (remover ;) da linha para 
+o seu sistema operacional. Ex:
+
+On Windows
+extension_dir = ext
+
+4. No arquivo php.ini, pesquisar por 'sqlite'. Descomentar as duas linhas com 'sqlite'. Exemplo:
+
+extension=pdo-sqlite
+
+extension=sqlite3
+
+
+############ NO LINUX ######################
+
+sudo apt install php-sqlite
+
+
