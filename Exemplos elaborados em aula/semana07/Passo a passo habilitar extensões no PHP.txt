@@ -21,6 +21,4 @@ extension=sqlite3
 
 ############ NO LINUX ######################
 
-sudo apt install php-sqlite
-
-
+sudo apt install php-sqlite3
