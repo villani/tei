@@ -1,0 +1,125 @@
+################### INSTALANDO O COMPOSER #################
+
+No Windows, baixe e execute o arquivo disponível em:
+
+https://getcomposer.org/Composer-Setup.exe
+
+No Linux, execute o seguinte comando no terminal:
+
+sudo apt install composer
+
+
+######### CRIANDO UM PROJETO LARAVEL COM O COMPOSER ##########
+
+	1 - Navegar até o local onde projeto deve ser criado;
+	2 - Abrir o terminal;
+	3 - No terminal, entrar com o comando:
+
+		composer create-project laravel/laravel nome-projeto
+
+
+##### ERROS - RESOLVENDO POSSÍVEIS DEPENDÊNCIAS DO COMPOSER ######
+
+O Composer pode necessitar que algumas extensões do PHP seja habilitadas para que 
+o projeto seja criado. Essas extensões são notificadas no terminal quando alguma
+extensão requerida não está habilitada.
+
+
+# Para habilitar extensões PHP no Windows
+
+	1 - Identifique o arquivo de configuração que o PHP está utilizando com o comando: 
+
+		php --ini
+
+	2 - Abra o arquivo "php.ini" identificado pelo comando do passo anterior. E localize
+	a extensão necessária. Por exemplo: "fileinfo";
+	3 - Descomente a referida linha da extensão (remova o ";" do início da linha:
+
+	De:
+		;extension=fileinfo
+	Para:
+		extension=fileinfo	
+
+	4 - Salve o arquivo e feche o editor. A extensão estará habilitada e o comando para 
+	criar o projeto Laravel pode ser executado novamente. Atente-se para o nome do
+	projeto que pode já ter sido criado, ainda que incompleto, na tentativa anterior.
+
+
+# Para habilitar extensões PHP no Linux
+
+	1 - Execute o comando a seguir para cada extensão do PHP que precisar habilitar.
+	Por exemplo:
+
+		sudo apt install php-fileinfo
+		sudo apt install php-mbstring
+
+
+############# INSTALANDO O INSTALADOR DO LARAVEL ##############
+
+O Laravel também possui um instalador para que um projeto possa ser criado ao invés
+de usar o Composer. No entanto, o Composer também é usado para instalar e instalador.
+Os passos a seguir orientam a instalar esse instalador.
+
+	1 - No Linux ou no Windows, execute o seguinte comando no terminal:
+
+		composer global require laravel/installer
+
+	2 - Mapeie o caminho para o binário/executável do "laravel" na variável de 
+	ambiente "Path" do seu sistema operacional. Exemplo:
+
+		 - Caminho no Linux
+		/home/leonardo/.config/composer/vendor/bin
+
+		- Caminho no Windows
+		C:/Users/[usuario]/AppData/Roaming/Composer/vendor/bin
+
+	3 - As subseções a seguir mostram como acrescentar esse valor para a
+	variável de ambiente para o seu sistema operacional.
+
+
+########### Configurar variáveis de ambiente no Windows ##########
+
+	1 - Pressione a tecla "Windows", pesquise por "variáveis";
+	2 - Nos resultados da pesquisa, clique em "Editar variáveis de ambiente para 
+	a sua conta"
+	3 - Na Lista "Variáveis do usuário", clicar na variável "Path" e no botão "Editar";
+	4 - Acrescentar o caminho: 
+
+		- No Windows 7
+		[caminho-existente];C:/Users/[usuario]/AppData/Roaming/Composer/vendor/bin
+
+		- No Windows 10
+		Clicar em Novo e inserir:
+		C:/Users/[usuario]/AppData/Roaming/Composer/vendor/bin
+
+
+########## Configurar variáveis de ambiente no Linux ###############
+
+	1 - Digite o seguinte comando no terminal:
+
+		code ~/.bashrc
+
+	2 - No final do arquivo, inserir a linha:
+
+		export PATH=$PATH:/home/[usuario]/.config/composer/vendor/bin
+
+	3 - Salvar e fechar o arquivo;
+	4 - Digite o comando a seguir para carregar os novos valores definidos:
+
+		source ./~bashrc
+
+
+#### CRIANDO UM PROJETO LARAVEL COM O INSTALADOR DO LARAVEL ####
+
+	1 - Navegar até o local onde projeto deve ser criado;
+	2 - Abrir o terminal;
+	3 - No terminal, entrar com o comando:
+		
+		laravel new nome-projeto
+
+
+
+
+
+
+
