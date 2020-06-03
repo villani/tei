@@ -1,0 +1,10 @@
+Esta pasta contém somente os arquivos de um projeto Laravel que foram alterados 
+durante o desenvolvimento da aplicação.
+
+Os demais arquivos que são gerados durante a criação de um projeto Laravel foram 
+removidos para reduzir o tamanho do pacote disponível, no entanto, continuam 
+sendo necessários para a execução da aplicação.
+
+Desse modo, os arquivos disponíveis nesse pacote devem ser usados apenas para 
+fins de consulta, pois não é possível executar uma aplicação Laravel a partir 
+desta pasta.
