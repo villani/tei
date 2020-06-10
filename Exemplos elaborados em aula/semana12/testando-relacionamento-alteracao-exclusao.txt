@@ -1,0 +1,329 @@
+$ # ENTRANDO NO TINKER
+$ php artisan tinker
+Psy Shell v0.10.4 (PHP 7.2.24-0ubuntu0.18.04.6 — cli) by Justin Hileman
+>>> 
+>>> // DISPONIBILIZANDO OS MODELOS NESSE AMBIENTE
+>>> use App\Usuario
+>>> use App\Categoria
+>>> 
+>>> // EXIBINDO TODOS OS REGISTROS DE UMA TABELA
+>>> Usuario::all()
+=> Illuminate\Database\Eloquent\Collection {#3901
+     all: [
+       App\Usuario {#3900
+         id: "1",
+         nome: "Mandetta",
+         email: "mandetta@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "1",
+         created_at: "2020-06-10 17:32:03",
+         updated_at: "2020-06-10 17:32:03",
+       },
+       App\Usuario {#3338
+         id: "2",
+         nome: "Teich",
+         email: "teich@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "1",
+         created_at: "2020-06-10 17:33:09",
+         updated_at: "2020-06-10 17:33:09",
+       },
+       App\Usuario {#3706
+         id: "3",
+         nome: "Piazzuello",
+         email: "piazzuello@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "0",
+         created_at: "2020-06-10 17:33:57",
+         updated_at: "2020-06-10 17:33:57",
+       },
+     ],
+   }
+>>> 
+>>> // TESTANDO A RESTRIÇÃO DE CHAVE-ESTRANGEIRA
+>>> Categoria::create(['usuario_id'=>4,'Saúde']);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: categorias.nome (SQL: insert into "categorias" ("usuario_id", "updated_at", "created_at") values (4, 2020-06-10 18:09:19, 2020-06-10 18:09:19))'
+>>> 
+>>> Categoria::create(['usuario_id'=>3,'Saúde']);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: categorias.nome (SQL: insert into "categorias" ("usuario_id", "updated_at", "created_at") values (3, 2020-06-10 18:09:57, 2020-06-10 18:09:57))'
+>>> 
+>>> Categoria::create(['usuario_id'=>4,'nome'=>'Saúde']);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (SQL: insert into "categorias" ("usuario_id", "nome", "updated_at", "created_at") values (4, Saúde, 2020-06-10 18:11:07, 2020-06-10 18:11:07))'
+>>> 
+>>> Categoria::create(['usuario_id'=>3,'nome'=>'Saúde']);
+=> App\Categoria {#3959
+     usuario_id: 3,
+     nome: "Saúde",
+     updated_at: "2020-06-10 18:11:53",
+     created_at: "2020-06-10 18:11:53",
+     id: 1,
+   }
+>>> Categoria::create(['usuario_id'=>3,'nome'=>'Economia']);
+=> App\Categoria {#3963
+     usuario_id: 3,
+     nome: "Economia",
+     updated_at: "2020-06-10 18:13:22",
+     created_at: "2020-06-10 18:13:22",
+     id: 2,
+   }
+>>> Categoria::create(['usuario_id'=>3,'nome'=>'Educação']);
+=> App\Categoria {#3338
+     usuario_id: 3,
+     nome: "Educação",
+     updated_at: "2020-06-10 18:13:31",
+     created_at: "2020-06-10 18:13:31",
+     id: 3,
+   }
+>>> 
+>>> // TESTAR O RELACIONAMENTO ENTRE OS MODELOS
+>>> Usuario::find(3)
+=> App\Usuario {#3953
+     id: "3",
+     nome: "Piazzuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 17:33:57",
+   }
+>>> Usuario::find(3)->categorias
+=> Illuminate\Database\Eloquent\Collection {#3706
+     all: [
+       App\Categoria {#3969
+         id: "1",
+         usuario_id: "3",
+         nome: "Saúde",
+         created_at: "2020-06-10 18:11:53",
+         updated_at: "2020-06-10 18:11:53",
+       },
+       App\Categoria {#3970
+         id: "2",
+         usuario_id: "3",
+         nome: "Economia",
+         created_at: "2020-06-10 18:13:22",
+         updated_at: "2020-06-10 18:13:22",
+       },
+       App\Categoria {#3971
+         id: "3",
+         usuario_id: "3",
+         nome: "Educação",
+         created_at: "2020-06-10 18:13:31",
+         updated_at: "2020-06-10 18:13:31",
+       },
+     ],
+   }
+>>> Usuario::find(3)->categorias[1]->nome
+=> "Economia"
+>>> 
+>>> Categoria::all()
+=> Illuminate\Database\Eloquent\Collection {#3338
+     all: [
+       App\Categoria {#3900
+         id: "1",
+         usuario_id: "3",
+         nome: "Saúde",
+         created_at: "2020-06-10 18:11:53",
+         updated_at: "2020-06-10 18:11:53",
+       },
+       App\Categoria {#3968
+         id: "2",
+         usuario_id: "3",
+         nome: "Economia",
+         created_at: "2020-06-10 18:13:22",
+         updated_at: "2020-06-10 18:13:22",
+       },
+       App\Categoria {#3014
+         id: "3",
+         usuario_id: "3",
+         nome: "Educação",
+         created_at: "2020-06-10 18:13:31",
+         updated_at: "2020-06-10 18:13:31",
+       },
+     ],
+   }
+>>> Categoria::find(2)
+=> App\Categoria {#3961
+     id: "2",
+     usuario_id: "3",
+     nome: "Economia",
+     created_at: "2020-06-10 18:13:22",
+     updated_at: "2020-06-10 18:13:22",
+   }
+>>> Categoria::find(2)->usuario
+=> App\Usuario {#3743
+     id: "3",
+     nome: "Piazzuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 17:33:57",
+   }
+>>> Categoria::find(2)->usuario->nome
+=> "Piazzuello"
+>>> 
+>>> 
+>>> Usuario::find(4)
+=> null
+>>> Usuario::find(1)
+=> App\Usuario {#3974
+     id: "1",
+     nome: "Mandetta",
+     email: "mandetta@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "1",
+     created_at: "2020-06-10 17:32:03",
+     updated_at: "2020-06-10 17:32:03",
+   }
+>>> Usuario::find(1)->categorias
+=> Illuminate\Database\Eloquent\Collection {#3980
+     all: [],
+   }
+>>> Usuario::all()
+=> Illuminate\Database\Eloquent\Collection {#3338
+     all: [
+       App\Usuario {#3978
+         id: "1",
+         nome: "Mandetta",
+         email: "mandetta@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "1",
+         created_at: "2020-06-10 17:32:03",
+         updated_at: "2020-06-10 17:32:03",
+       },
+       App\Usuario {#3981
+         id: "2",
+         nome: "Teich",
+         email: "teich@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "1",
+         created_at: "2020-06-10 17:33:09",
+         updated_at: "2020-06-10 17:33:09",
+       },
+       App\Usuario {#3982
+         id: "3",
+         nome: "Piazzuello",
+         email: "piazzuello@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "0",
+         created_at: "2020-06-10 17:33:57",
+         updated_at: "2020-06-10 17:33:57",
+       },
+     ],
+   }
+>>> 
+>>> Categoria::all()
+=> Illuminate\Database\Eloquent\Collection {#3983
+     all: [
+       App\Categoria {#3984
+         id: "1",
+         usuario_id: "3",
+         nome: "Saúde",
+         created_at: "2020-06-10 18:11:53",
+         updated_at: "2020-06-10 18:11:53",
+       },
+       App\Categoria {#3985
+         id: "2",
+         usuario_id: "3",
+         nome: "Economia",
+         created_at: "2020-06-10 18:13:22",
+         updated_at: "2020-06-10 18:13:22",
+       },
+       App\Categoria {#3986
+         id: "3",
+         usuario_id: "3",
+         nome: "Educação",
+         created_at: "2020-06-10 18:13:31",
+         updated_at: "2020-06-10 18:13:31",
+       },
+     ],
+   }
+>>> $usuario = Usuario::find(3)
+=> App\Usuario {#3982
+     id: "3",
+     nome: "Piazzuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 17:33:57",
+   }
+>>> $usuario->nome 
+=> "Piazzuello"
+>>> $usuario->nome = "Pazuello"
+=> "Pazuello"
+>>> Usuario::find(3)
+=> App\Usuario {#3958
+     id: "3",
+     nome: "Piazzuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 17:33:57",
+   }
+>>> $usuario->save()
+=> true
+>>> 
+>>> Usuario::find(3)
+=> App\Usuario {#3970
+     id: "3",
+     nome: "Pazuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 18:27:49",
+   }
+>>> 
+>>> $user = Usuario::find(1)
+=> App\Usuario {#3958
+     id: "1",
+     nome: "Mandetta",
+     email: "mandetta@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "1",
+     created_at: "2020-06-10 17:32:03",
+     updated_at: "2020-06-10 17:32:03",
+   }
+>>> 
+>>> $user->delete()
+=> true
+>>> 
+>>> Usuario::all()
+=> Illuminate\Database\Eloquent\Collection {#3987
+     all: [
+       App\Usuario {#3988
+         id: "2",
+         nome: "Teich",
+         email: "teich@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "1",
+         created_at: "2020-06-10 17:33:09",
+         updated_at: "2020-06-10 17:33:09",
+       },
+       App\Usuario {#3989
+         id: "3",
+         nome: "Pazuello",
+         email: "piazzuello@ig.com.br",
+         senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+         nivel: "0",
+         created_at: "2020-06-10 17:33:57",
+         updated_at: "2020-06-10 18:27:49",
+       },
+     ],
+   }
+>>> 
+>>> Usuario::find(3)
+=> App\Usuario {#3979
+     id: "3",
+     nome: "Pazuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: "0",
+     created_at: "2020-06-10 17:33:57",
+     updated_at: "2020-06-10 18:27:49",
+   }
+>>> Usuario::find(3)->delete()
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (SQL: delete from "usuarios" where "id" = 3)'
+>>> 

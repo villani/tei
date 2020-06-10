@@ -1,0 +1,117 @@
+$ # OBTENDO O LOCAL ATUAL
+$ pwd
+/home/leonardo/Documentos/Fatec/2020.01/TEI/semana12
+$ 
+$ # EXECUTANDO O COMANDO PARA CRIAR MODELOS
+$ php artisan make:model -a Usuario
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_10_164409_create_usuarios_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ php artisan make:model -a Categoria
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_10_164621_create_categorias_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ # PROCESSANDO AS MIGRAÇÕES DEFINIDAS
+$ php artisan migrate
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (0.02 seconds)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (0.01 seconds)
+Migrating: 2020_06_10_164409_create_usuarios_table
+Migrated:  2020_06_10_164409_create_usuarios_table (0.02 seconds)
+Migrating: 2020_06_10_164621_create_categorias_table
+Migrated:  2020_06_10_164621_create_categorias_table (0.03 seconds)
+$ 
+$ # CONFERINDO O QUE FOI GERADO NO BASE portal.sqlite
+$ sqlite3 database/portal.sqlite 
+SQLite version 3.22.0 2018-01-22 18:45:57
+Enter ".help" for usage hints.
+sqlite> 
+sqlite> -- LISTANDO AS TABELAS DA BASE
+sqlite> .tables
+categorias   failed_jobs  migrations   users        usuarios   
+sqlite> 
+sqlite> -- VERIFICANDO OS RELACIONAMENTOS DA BASE
+sqlite> .dump
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "migrations" ("id" integer not null primary key autoincrement, "migration" varchar not null, "batch" integer not null);
+INSERT INTO migrations VALUES(1,'2014_10_12_000000_create_users_table',1);
+INSERT INTO migrations VALUES(2,'2019_08_19_000000_create_failed_jobs_table',1);
+INSERT INTO migrations VALUES(3,'2020_06_10_164409_create_usuarios_table',1);
+INSERT INTO migrations VALUES(4,'2020_06_10_164621_create_categorias_table',1);
+CREATE TABLE IF NOT EXISTS "users" ("id" integer not null primary key autoincrement, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime null, "password" varchar not null, "remember_token" varchar null, "created_at" datetime null, "updated_at" datetime null);
+CREATE TABLE IF NOT EXISTS "failed_jobs" ("id" integer not null primary key autoincrement, "connection" text not null, "queue" text not null, "payload" text not null, "exception" text not null, "failed_at" datetime default CURRENT_TIMESTAMP not null);
+CREATE TABLE IF NOT EXISTS "usuarios" ("id" integer not null primary key autoincrement, "nome" varchar not null, "email" varchar not null, "senha" varchar not null, "nivel" integer not null, "created_at" datetime null, "updated_at" datetime null);
+CREATE TABLE IF NOT EXISTS "categorias" ("id" integer not null primary key autoincrement, "usuario_id" integer not null, "nome" varchar not null, "created_at" datetime null, "updated_at" datetime null, foreign key("usuario_id") references "usuarios"("id"));
+DELETE FROM sqlite_sequence;
+INSERT INTO sqlite_sequence VALUES('migrations',4);
+CREATE UNIQUE INDEX "users_email_unique" on "users" ("email");
+CREATE UNIQUE INDEX "usuarios_email_unique" on "usuarios" ("email");
+CREATE UNIQUE INDEX "categorias_nome_unique" on "categorias" ("nome");
+COMMIT;
+sqlite> 
+sqlite> -- SAINDO DO SQLITE
+sqlite> .quit
+$ 
+$ # TESTANDO O RELACIONAMENTO ENTRE MODELOS NO TINKER
+$ php artisan tinker
+Psy Shell v0.10.4 (PHP 7.2.24-0ubuntu0.18.04.6 — cli) by Justin Hileman
+>>> 
+>>> // DISPONIBILIZANDO OS MODELOS NESSE AMBIENTE
+>>> use App\Usuario;
+>>> use App\Categoria
+>>> 
+>>> // INSERINDO REGISTROS NA TABELA usuarios
+>>> Usuario::create(['nome'=>'Mandetta','email'=>'mandetta@ig.com.br','senha'=>sha1(123),>>> Usuario::create(['nome'=>'Mandetta','email
+PHP Parse error: Syntax error, unexpected T_ENCAPSED_AND_WHITESPACE on line 1
+>>> Usuario::create(['nome'=>'Mandetta','email'=>'mandetta@ig.com.br','senha'=>sha1(123),'nivel'=>1);
+PHP Parse error: Syntax error, unexpected ')', expecting ']' on line 1
+>>> Usuario::create(['nome'=>'Mandetta','email'=>'mandetta@ig.com.br','senha'=>sha1(123),'nivel'=>1]);
+=> App\Usuario {#3746
+     nome: "Mandetta",
+     email: "mandetta@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: 1,
+     updated_at: "2020-06-10 17:32:03",
+     created_at: "2020-06-10 17:32:03",
+     id: 1,
+   }
+>>> Usuario::create(['nome'=>'Teich','email'=>'teich@ig.com.br','senha'=>sha1(123),'nivel'=>1]);
+=> App\Usuario {#3960
+     nome: "Teich",
+     email: "teich@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: 1,
+     updated_at: "2020-06-10 17:33:09",
+     created_at: "2020-06-10 17:33:09",
+     id: 2,
+   }
+>>> Usuario::create(['nome'=>'Piazzuello','email'=>'piazzuello@ig.com.br','senha'=>sha1(123),'nivel'=>0]);
+=> App\Usuario {#3016
+     nome: "Piazzuello",
+     email: "piazzuello@ig.com.br",
+     senha: "40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+     nivel: 0,
+     updated_at: "2020-06-10 17:33:57",
+     created_at: "2020-06-10 17:33:57",
+     id: 3,
+   }
+>>> 
+>>> // SAINDO DO TINKER
+>>> exit;
+Exit:  Goodbye
+$ 
+$ # TESTANDO O RELACIONAMENTO ENTRE MODELOS NO TINKER
+$ php artisan tinker
+Psy Shell v0.10.4 (PHP 7.2.24-0ubuntu0.18.04.6 — cli) by Justin Hileman
+>>> // DISPONIBILIZANDO OS MODELOS NESSE AMBIENTE
+>>> use App\Categoria
+>>> use App\Usuario;
