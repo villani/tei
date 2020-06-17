@@ -1,0 +1,129 @@
+$ # PROCESSANDO AS MIGRAÇÕES DO PROJETO
+$ php artisan migrate
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (0.02 seconds)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (0.02 seconds)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (0.01 seconds)
+$ 
+$ # TESTANDO OS RECURSOS DE AUTENTICAÇÃO NO TERMINAL
+$ php artisan tinker
+Psy Shell v0.10.4 (PHP 7.2.24-0ubuntu0.18.04.6 — cli) by Justin Hileman
+>>> 
+>>> // VERIFICAR OS USUÁRIOS DISPONÍVEIS
+>>> User::all()
+[!] Aliasing 'User' to 'App\User' for this Tinker session.
+=> Illuminate\Database\Eloquent\Collection {#3840
+     all: [],
+   }
+>>> 
+>>> User::all()
+=> Illuminate\Database\Eloquent\Collection {#3928
+     all: [],
+   }
+>>> 
+>>> # INSERINDO UM USUÁRIO POR LINHA DE COMANDO
+>>> User::create(['name'=>'Bolsonaro','email'=>'bolso@ig.com.br>>> ;
+>>> User::all()
+=> Illuminate\Database\Eloquent\Collection {#3930
+     all: [],
+   }
+>>> 
+>>> User::create(['name'=>'Bolsonaro','email'=>'bolso@ig.com.br','senha'=>Hash::make('123')]);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: users.password (SQL: insert into "users" ("name", "email", "updated_at", "created_at") values (Bolsonaro, bolso@ig.com.br, 2020-06-17 17:21:37, 2020-06-17 17:21:37))'
+>>> User::create(['name'=>'Bolsonaro','email'=>'bolso@ig.com.br','password'=>Hash::make('123')]);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: users.nivel (SQL: insert into "users" ("name", "email", "password", "updated_at", "created_at") values (Bolsonaro, bolso@ig.com.br, $2y$10$QTzFsWhrTG8asKfhRmxfrOpfKDhKboT46/gUdKff2IGUUwVdxc3Zq, 2020-06-17 17:22:33, 2020-06-17 17:22:33))'
+>>> User::create(['name'=>'Bolsonaro','email'=>'bolso@ig.com.br','password'=>Hash::make('123'),'nivel'=>1]);
+Illuminate/Database/QueryException with message 'SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: users.nivel (SQL: insert into "users" ("name", "email", "password", "updated_at", "created_at") values (Bolsonaro, bolso@ig.com.br, $2y$10$.nFua1OgYK9EdHDlmnVPr.FjR.K6UhI.w6yFQLLTDMFQMHjdGW0c., 2020-06-17 17:23:20, 2020-06-17 17:23:20))'
+>>> 
+>>> exit
+Exit:  Goodbye
+$ 
+$ # TESTANDO OS RECURSOS DE AUTENTICAÇÃO NO TERMINAL
+$ php artisan tinker
+Psy Shell v0.10.4 (PHP 7.2.24-0ubuntu0.18.04.6 — cli) by Justin Hileman
+>>> 
+>>> # DISPONIBILIZAR A CLASSE User NO TINKER
+>>> use App\User
+>>> 
+>>> # INSERINDO UM USUÁRIO NA TABELA
+>>> User::create(['name'=>'Bolsonaro','email'=>'bolso@ig.com.br','password'=>Hash::make('123'),'nivel'=>1]);
+=> App\User {#3775
+     name: "Bolsonaro",
+     email: "bolso@ig.com.br",
+     nivel: 1,
+     updated_at: "2020-06-17 17:26:46",
+     created_at: "2020-06-17 17:26:46",
+     id: 1,
+   }
+>>> 
+>>> # EXIBINDO OS USUÁRIOS DA TABELA
+>>> User::all()
+=> Illuminate\Database\Eloquent\Collection {#3370
+     all: [
+       App\User {#3932
+         id: "1",
+         name: "Bolsonaro",
+         email: "bolso@ig.com.br",
+         email_verified_at: null,
+         nivel: "1",
+         created_at: "2020-06-17 17:26:46",
+         updated_at: "2020-06-17 17:26:46",
+       },
+     ],
+   }
+>>> User::find(1)->name
+=> "Bolsonaro"
+>>> User::find(1)->password
+=> "$2y$10$gvs6/A7rGvmPShreA7kU/u3SmpE14viriFgmlwhL9fTCFJX5PbQB."
+>>> 
+>>> # USANDO RECURSOS DE AUTENTICAÇÃO
+>>> # - Verificando se há usuário autenticado
+>>> Auth::check()
+=> false
+>>> 
+>>> # - Autenticando usuário no terminal
+>>> Auth::attempt(['email'=>'bolso@ig.com.br','senha'=>'123']);
+=> false
+>>> 
+>>> Auth::attempt(['email'=>'bolso@ig.com.br','password'=>'123']);
+PHP Warning:  unlink(/home/leonardo/Documentos/Fatec/2020.01/TEI/semana13/storage/framework/sessions/NnJup3k12tagtq05B0rATGauaBIGj6zs0f3TDB0P): No such file or directory in /home/leonardo/Documentos/Fatec/2020.01/TEI/semana13/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 218
+=> true
+>>> 
+>>> # - Verificando se há usuário autenticado
+>>> Auth::check()
+=> true
+>>> 
+>>> Hash::make('123')
+=> "$2y$10$gcwz3fXWJvbXDeu77pNgK.UqxJjiPsfsMqAym0Cir8FLvxKA.S5sK"
+>>> 
+>>> Hash::make('123')
+=> "$2y$10$4dAyPor8GhkuoUA7V8wG4uhufkc9C1/mZ0nEUzs51molYGMZ8g0cS"
+>>> 
+>>> Hash::make('456')
+=> "$2y$10$0F.VC.FOZ0J1NpyVTMAIwOsiV6DvpbZ3YS9U7NCJRzSnFcl.GsIUa"
+>>> 
+>>> Auth::user()
+=> App\User {#3998
+     id: "1",
+     name: "Bolsonaro",
+     email: "bolso@ig.com.br",
+     email_verified_at: null,
+     nivel: "1",
+     created_at: "2020-06-17 17:26:46",
+     updated_at: "2020-06-17 17:26:46",
+   }
+>>> # ^ - Obtendo detalhes do usuário autenticado
+>>> 
+>>> # - Encerrando a sessão do usuário
+>>> Auth::logout()
+=> null
+>>> 
+>>> Auth::check()
+=> false
+>>> 
+>>> Auth::user()
+=> null
+>>> 
