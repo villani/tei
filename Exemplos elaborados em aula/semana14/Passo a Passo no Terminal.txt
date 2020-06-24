@@ -1,0 +1,54 @@
+$ # CRIANDO MODELOS, MIGRAÇÕES E CONTROLADORES PARA A APLICAÇÃO
+$ php artisan make:model -a Categoria
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_24_164230_create_categorias_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ php artisan make:model -a Noticia
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_24_164310_create_noticias_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ php artisan make:model -a Avaliacao
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_24_164344_create_avaliacaos_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ php artisan make:model -a Comentario
+Model created successfully.
+Factory created successfully.
+Created Migration: 2020_06_24_164434_create_comentarios_table
+Seeder created successfully.
+Controller created successfully.
+$ 
+$ # PROCESSANDO AS MIGRAÇÕES
+$ php artisan migrate
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (0.02 seconds)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (0.01 seconds)
+Migrating: 2020_06_24_164230_create_categorias_table
+Migrated:  2020_06_24_164230_create_categorias_table (0.03 seconds)
+Migrating: 2020_06_24_164310_create_noticias_table
+Migrated:  2020_06_24_164310_create_noticias_table (0.01 seconds)
+Migrating: 2020_06_24_164344_create_avaliacaos_table
+Migrated:  2020_06_24_164344_create_avaliacaos_table (0.01 seconds)
+Migrating: 2020_06_24_164434_create_comentarios_table
+Migrated:  2020_06_24_164434_create_comentarios_table (0.01 seconds)
+$ 
+$ 
+$ # DISPONIBILIZANDO O RECURSO DE AUTENTICAÇÃO
+$ composer require laravel/ui
+$
+$ # HABILITANDO O RECURSO DE AUTENTICAÇÃO NA APLICAÇÃO
+$ php artisan ui vue --auth
+$
+$ # COMPILANDO AS VISÕES DO RECURSO DE AUTENTICAÇÃO
+$ npm install && npm run dev

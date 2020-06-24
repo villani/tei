@@ -1,0 +1,28 @@
+[11:37] LEONARDO VILLANIConteúdo da Semana 14 - Seção 16
+    
+
+
+	
+Recapitulando os tópicos da aula anterior.
+	Revisão dos tópicos sobre Laravel:
+	
+
+		
+Criando o Portal de Notícias;
+		Definindo as configurações da base de dados;
+		Definindo as migrations;
+		Definindo os modelos;
+		Usando o modelo User ao invés de Usuario para realizar autenticação;
+		Definindo o CRUD para as Categorias e Notícias do Portal;
+		Inserindo token de segurança em formulários;
+		Definindo o nível de restrições do usuário;
+		Deploy da aplicação Laravel no 000webhost.
+	
+	
+	Suporte ao desenvolvimento dos projetos individuais.
+	Tira-dúvidas pontuais.
+
+
+Material de apoio disponível em: https://www.leonardovillani.com.br/cursos/course/view.php?id=6#section-17
+
+Editada<https://teams.microsoft.com/l/message/19:871134d42b204f41a6d185bdf676bba5@thread.tacv2/1593009430558?tenantId=cf72e2bd-7a2b-4783-bdeb-39d57b07f76f&amp;groupId=f1f9973f-1bde-4226-843f-1a14007aa08f&amp;parentMessageId=1593009430558&amp;teamName=Topicos Especiais em Informatica (Escolha 2)-A-T-ADS-PGR-20201&amp;channelName=Semana 14 - Seção 16&amp;createdTime=1593009430558>
