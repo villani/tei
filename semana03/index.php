@@ -10,6 +10,7 @@ $usuario = new Usuario; // __construct.
 // - Como tais atributos estão encapsulados, o método mágico __set é chamado.
 $usuario->nome = 'Bolsonaro'; // __set ($atributo = 'nome', $valor = 'Bolsonaro').
 $usuario->email = 'bolso@gmail.com'; // __set ($atributo = 'email', $valor = 'bolso@gmail.com').
+$usuario->senha = 123456;
 
 // Obtendo o valor do atributo 'nome'.
 // - Como o atributo está encapsulado, o método mágico __get é chamado.

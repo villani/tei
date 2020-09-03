@@ -18,6 +18,11 @@ class Usuario
      */
     public function __set($atributo, $valor)
     {
+        if ($atributo == 'senha') {
+            if (!is_numeric($valor)) {
+                throw new Exception('A senha precisa ter somente números.');
+            }
+        }
         $this->$atributo = $valor;
     }
 
